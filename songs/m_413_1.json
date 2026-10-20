@@ -1,0 +1,450 @@
+{
+ "schema": 1,
+ "id": "m_413_1",
+ "source": {
+  "file": "scans/m_413_1.png",
+  "width": 1374,
+  "height": 382
+ },
+ "engine": {
+  "name": "homr",
+  "variant": "2x"
+ },
+ "status": "recognized",
+ "clef": "G2",
+ "key": -3,
+ "time": "2/4",
+ "systems": [
+  {
+   "lines": [
+    93.3,
+    107.0,
+    119.2,
+    131.3,
+    144.2
+   ],
+   "x0": 78.7,
+   "x1": 1352.5,
+   "unit": 12.44
+  },
+  {
+   "lines": [
+    246.9,
+    261.0,
+    273.6,
+    286.7,
+    299.5
+   ],
+   "x0": 14.3,
+   "x1": 1352.5,
+   "unit": 13.3
+  }
+ ],
+ "measures": [
+  {
+   "index": 1,
+   "time": "2/4",
+   "notes": [
+    {
+     "pitch": "G4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 295.2,
+     "y": 131.0,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "C5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 373.4,
+     "y": 112.3,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "B4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 459.1,
+     "y": 119.2,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "C5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 541.7,
+     "y": 112.4,
+     "matched": true,
+     "system": 0
+    }
+   ],
+   "flags": [],
+   "system": 0,
+   "box": [
+    78.7,
+    43.5,
+    591.8,
+    193.9
+   ]
+  },
+  {
+   "index": 2,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "D5",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 641.9,
+     "y": 105.9,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "G5",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 725.1,
+     "y": 86.2,
+     "matched": true,
+     "system": 0
+    }
+   ],
+   "flags": [],
+   "system": 0,
+   "box": [
+    591.8,
+    43.5,
+    774.4,
+    193.9
+   ]
+  },
+  {
+   "index": 3,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "F5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 823.7,
+     "y": 92.0,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "F5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 906.9,
+     "y": 92.5,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "F5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 988.6,
+     "y": 92.3,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "Eb5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1074.6,
+     "y": 100.2,
+     "matched": true,
+     "system": 0
+    }
+   ],
+   "flags": [],
+   "system": 0,
+   "box": [
+    774.4,
+    43.5,
+    1126.2,
+    193.9
+   ]
+  },
+  {
+   "index": 4,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "D5",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1177.9,
+     "y": 104.8,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "C5",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1269.9,
+     "y": 112.4,
+     "matched": true,
+     "system": 0
+    }
+   ],
+   "flags": [],
+   "system": 0,
+   "box": [
+    1126.2,
+    43.5,
+    1352.5,
+    193.9
+   ]
+  },
+  {
+   "index": 5,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "D5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 178.9,
+     "y": 258.3,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "D5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 264.8,
+     "y": 259.4,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "Bb4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 345.3,
+     "y": 272.3,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "D5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 431.5,
+     "y": 259.4,
+     "matched": true,
+     "system": 1
+    }
+   ],
+   "flags": [],
+   "system": 1,
+   "box": [
+    14.3,
+    193.7,
+    480.4,
+    352.7
+   ]
+  },
+  {
+   "index": 6,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "F5",
+     "dur": 1.5,
+     "dots": 1,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 529.4,
+     "y": 247.4,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "C5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 709.4,
+     "y": 266.7,
+     "matched": true,
+     "system": 1
+    }
+   ],
+   "flags": [],
+   "system": 1,
+   "box": [
+    480.4,
+    193.7,
+    759.2,
+    352.7
+   ]
+  },
+  {
+   "index": 7,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "Bb4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 809.0,
+     "y": 270.9,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "Ab4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 891.7,
+     "y": 278.0,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "G4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 973.5,
+     "y": 286.4,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "Bb4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1059.5,
+     "y": 272.7,
+     "matched": true,
+     "system": 1
+    }
+   ],
+   "flags": [],
+   "system": 1,
+   "box": [
+    759.2,
+    193.7,
+    1110.5,
+    352.7
+   ]
+  },
+  {
+   "index": 8,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "D5",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1161.5,
+     "y": 260.5,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "G4",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1258.4,
+     "y": 286.2,
+     "matched": true,
+     "system": 1
+    }
+   ],
+   "flags": [],
+   "system": 1,
+   "box": [
+    1110.5,
+    193.7,
+    1352.5,
+    352.7
+   ]
+  }
+ ],
+ "stats": {
+  "notes": 24,
+  "doubtful_bars": 0,
+  "seconds": 6.4
+ }
+}

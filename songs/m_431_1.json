@@ -1,0 +1,538 @@
+{
+ "schema": 1,
+ "id": "m_431_1",
+ "source": {
+  "file": "scans/m_431_1.png",
+  "width": 1382,
+  "height": 399
+ },
+ "engine": {
+  "name": "homr",
+  "variant": "2x"
+ },
+ "status": "recognized",
+ "clef": "G2",
+ "key": 1,
+ "time": "5/4",
+ "systems": [
+  {
+   "lines": [
+    77.0,
+    90.7,
+    103.4,
+    115.6,
+    127.8
+   ],
+   "x0": 79.2,
+   "x1": 1360.4,
+   "unit": 12.78
+  },
+  {
+   "lines": [
+    232.5,
+    244.7,
+    257.7,
+    271.0,
+    283.9
+   ],
+   "x0": 14.4,
+   "x1": 1360.4,
+   "unit": 12.96
+  }
+ ],
+ "measures": [
+  {
+   "index": 1,
+   "time": "5/4",
+   "notes": [
+    {
+     "pitch": "E4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 255.3,
+     "y": 127.6,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "E4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 308.1,
+     "y": 127.8,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "A4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 363.1,
+     "y": 108.7,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "B4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 421.1,
+     "y": 103.3,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "C5",
+     "dur": 0.25,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 476.1,
+     "y": 97.5,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "B4",
+     "dur": 0.25,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 505.5,
+     "y": 103.1,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "A4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 533.7,
+     "y": 109.8,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "G4",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 585.9,
+     "y": 116.6,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "E4",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 686.8,
+     "y": 127.9,
+     "matched": true,
+     "system": 0
+    }
+   ],
+   "flags": [],
+   "system": 0,
+   "box": [
+    79.2,
+    25.9,
+    742.8,
+    178.9
+   ]
+  },
+  {
+   "index": 2,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "B4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 798.9,
+     "y": 102.4,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "B4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 853.7,
+     "y": 102.9,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "E5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 913.4,
+     "y": 83.5,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "E5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 968.5,
+     "y": 83.4,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "D#5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1025.0,
+     "y": 90.0,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "F#5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1081.7,
+     "y": 75.0,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "E5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1139.5,
+     "y": 83.1,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "D5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1196.8,
+     "y": 89.8,
+     "matched": true,
+     "system": 0
+    },
+    {
+     "pitch": "B4",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": true,
+     "grace": false,
+     "x": 1254.6,
+     "y": 101.9,
+     "matched": true,
+     "system": 0
+    }
+   ],
+   "flags": [],
+   "system": 0,
+   "box": [
+    742.8,
+    25.9,
+    1360.4,
+    178.9
+   ]
+  },
+  {
+   "index": 3,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "B4",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 122.0,
+     "y": 257.3,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "E5",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 235.4,
+     "y": 236.1,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "D5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 349.8,
+     "y": 243.6,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "C5",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 414.6,
+     "y": 251.2,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "B4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 475.6,
+     "y": 258.0,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "A4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 543.0,
+     "y": 264.7,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "G4",
+     "dur": 0.25,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 608.9,
+     "y": 269.2,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "F#4",
+     "dur": 0.25,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 642.1,
+     "y": 277.0,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "E4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 671.6,
+     "y": 282.2,
+     "matched": true,
+     "system": 1
+    }
+   ],
+   "flags": [],
+   "system": 1,
+   "box": [
+    14.4,
+    180.7,
+    712.8,
+    335.8
+   ]
+  },
+  {
+   "index": 4,
+   "time": null,
+   "notes": [
+    {
+     "pitch": "G4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 754.0,
+     "y": 271.0,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "G4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 816.6,
+     "y": 272.1,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "A4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 881.0,
+     "y": 263.8,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "A4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 946.2,
+     "y": 263.4,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "B4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1007.9,
+     "y": 257.1,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "A4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1070.7,
+     "y": 263.0,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "G4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1135.8,
+     "y": 271.0,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "F#4",
+     "dur": 0.5,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1193.4,
+     "y": 278.2,
+     "matched": true,
+     "system": 1
+    },
+    {
+     "pitch": "E4",
+     "dur": 1.0,
+     "dots": 0,
+     "tie": null,
+     "fermata": false,
+     "grace": false,
+     "x": 1250.3,
+     "y": 282.9,
+     "matched": true,
+     "system": 1
+    }
+   ],
+   "flags": [],
+   "system": 1,
+   "box": [
+    712.8,
+    180.7,
+    1360.4,
+    335.8
+   ]
+  }
+ ],
+ "stats": {
+  "notes": 36,
+  "doubtful_bars": 0,
+  "seconds": 6.3
+ }
+}
