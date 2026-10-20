@@ -226,9 +226,9 @@
      "grace": false
     }
    ],
-   "llm": {
+   "vote": {
     "choice": "unknown",
-    "reason": "The bar appears to show three similar symbols (around E5, D5 and E5) with unusual flag-like shapes, which matches neither the four-event reading A nor reading B's starting C5 C5, and the crop and symbol shapes are unclear."
+    "source": "3x"
    }
   },
   {
@@ -511,6 +511,6 @@
  "stats": {
   "notes": 25,
   "doubtful_bars": 1,
-  "seconds": 18.2
+  "seconds": 13.2
  }
 }

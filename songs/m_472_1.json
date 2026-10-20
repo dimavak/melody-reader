@@ -146,9 +146,9 @@
      "grace": false
     }
    ],
-   "llm": {
+   "vote": {
     "choice": "unknown",
-    "reason": "The bar shows four eighth notes, C5, C5, E5, E5: the first two noteheads sit in the C5 space and the last two in the E5 space. Reading A wrongly makes the last two C5, and reading B replaces the fourth note with rests and overfills the bar."
+    "source": "3x"
    }
   },
   {
@@ -553,6 +553,6 @@
  "stats": {
   "notes": 29,
   "doubtful_bars": 1,
-  "seconds": 12.8
+  "seconds": 13.1
  }
 }

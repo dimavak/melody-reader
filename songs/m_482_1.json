@@ -472,9 +472,9 @@
      "grace": false
     }
    ],
-   "llm": {
+   "vote": {
     "choice": "A",
-    "reason": "The bar reads as an eighth A4, a beamed sixteenth pair Bb4 (with a bracketed cautionary flat) and A4, an eighth G4 and an eighth Bb4 on the middle line, which fits the treble-clef staff and fills 4/8, whereas B's low pitches do not match."
+    "source": "3x"
    }
   },
   {
@@ -614,9 +614,9 @@
      "grace": false
     }
    ],
-   "llm": {
+   "vote": {
     "choice": "A",
-    "reason": "In treble clef with two flats, the noteheads sit at C5, C5, Bb4, A4, Bb4 and A4, and the rhythm (eighth, two beamed sixteenths, flagged eighth, two beamed sixteenths) fills the 4/8 bar; B's pitches are about a sixth too low."
+    "source": "3x"
    }
   },
   {
@@ -656,15 +656,15 @@
      "grace": false
     }
    ],
-   "llm": {
+   "vote": {
     "choice": "A",
-    "reason": "The half note sits on the second line from the bottom of the treble staff, which is G4 with a duration of 2, not a ledger-line A3 below the staff."
+    "source": "3x"
    }
   }
  ],
  "stats": {
   "notes": 33,
   "doubtful_bars": 6,
-  "seconds": 24.0
+  "seconds": 13.5
  }
 }

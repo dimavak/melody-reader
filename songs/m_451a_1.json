@@ -313,9 +313,9 @@
      "grace": false
     }
    ],
-   "llm": {
+   "vote": {
     "choice": "B",
-    "reason": "The bar shows four flagged eighth notes, each with its notehead in the third space (C5), which fills 2/4 exactly and matches reading B."
+    "source": "3x"
    }
   },
   {
@@ -558,6 +558,6 @@
  "stats": {
   "notes": 30,
   "doubtful_bars": 1,
-  "seconds": 9.7
+  "seconds": 13.5
  }
 }

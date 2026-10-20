@@ -156,46 +156,14 @@
      "system": 0
     }
    ],
-   "flags": [
-    "disagree"
-   ],
+   "flags": [],
    "system": 0,
    "box": [
     523.5,
     27.5,
     761.2,
     178.3
-   ],
-   "alt": [
-    {
-     "pitch": "C5",
-     "dur": 1.5,
-     "dots": 1,
-     "tie": null,
-     "fermata": true,
-     "grace": false
-    },
-    {
-     "pitch": "B4",
-     "dur": 0.5,
-     "dots": 0,
-     "tie": null,
-     "fermata": false,
-     "grace": false
-    },
-    {
-     "pitch": "G4",
-     "dur": 0.5,
-     "dots": 0,
-     "tie": null,
-     "fermata": false,
-     "grace": false
-    }
-   ],
-   "llm": {
-    "choice": "A",
-    "reason": "The fermata note is a plain quarter-note C5 with no augmentation dot beside it (the dot belongs to the fermata), followed by beamed eighths B4 and G4, which fills 2/4 exactly."
-   }
+   ]
   },
   {
    "index": 3,
@@ -348,9 +316,9 @@
      "grace": false
     }
    ],
-   "llm": {
+   "vote": {
     "choice": "A",
-    "reason": "The first note is a plain quarter-note C5 with no augmentation dot beside it (the dot belongs to the fermata), followed by two beamed eighths B4 and G4, which totals 2 beats and fits 2/4."
+    "source": "3x"
    }
   },
   {
@@ -568,7 +536,7 @@
  ],
  "stats": {
   "notes": 29,
-  "doubtful_bars": 2,
-  "seconds": 13.4
+  "doubtful_bars": 1,
+  "seconds": 12.8
  }
 }

@@ -344,9 +344,9 @@
      "grace": false
     }
    ],
-   "llm": {
+   "vote": {
     "choice": "unknown",
-    "reason": "The bar ends with a plain C5 quarter note that has no augmentation dot and no following B4 eighth, so neither A's extra B4 nor B's dotted-quarter C5 matches the printed bar."
+    "source": "3x"
    }
   },
   {
@@ -549,6 +549,6 @@
  "stats": {
   "notes": 30,
   "doubtful_bars": 1,
-  "seconds": 14.8
+  "seconds": 12.8
  }
 }
