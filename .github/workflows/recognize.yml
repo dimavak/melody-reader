@@ -1,0 +1,69 @@
+# Recognises new scans: a PNG, JPG or PDF pushed to scans/ becomes
+# songs/<name>.json (for the editor) and export/<name>.musicxml.
+name: Recognize scans
+
+on:
+  push:
+    branches: [main]
+    paths: ["scans/**"]
+  workflow_dispatch:
+    inputs:
+      redo:
+        description: "Recognise all scans again, not only new ones"
+        type: boolean
+        default: false
+
+concurrency:
+  group: recognize
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  recognize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Find homr model folder
+        id: homr
+        run: echo "dir=$(python -c 'import homr, os; print(os.path.dirname(homr.__file__))')" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.homr.outputs.dir }}/**/*.onnx
+          key: homr-models-${{ hashFiles('requirements.txt') }}
+
+      - name: Recognise
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ "${{ inputs.redo }}" = "true" ]; then
+            python -m melody_reader recognize scans
+          else
+            python -m melody_reader recognize scans --skip-existing
+          fi
+
+      - name: Commit results
+        run: |
+          git config user.name "melody-reader bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add songs export pages 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Nothing new"
+          else
+            git commit -m "Recognise scans"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
