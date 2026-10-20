@@ -1,7 +1,8 @@
 """Find bars that a person should look at.
 
 Two sources of doubt:
-- the two homr runs (original and 2x) disagree on the bar;
+- the two homr runs (original and 2x) disagree on the bar (a third run, 3x,
+  then votes for one of the two readings);
 - simple musical rules fail (bar length vs time signature, a fermata over a dotted
   note, a note far outside the song's range).
 """

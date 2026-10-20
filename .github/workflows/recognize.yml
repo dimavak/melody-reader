@@ -46,8 +46,6 @@ jobs:
           key: homr-models-${{ hashFiles('requirements.txt') }}
 
       - name: Recognise
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           if [ "${{ inputs.redo }}" = "true" ]; then
             python -m melody_reader recognize scans
