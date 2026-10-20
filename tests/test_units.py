@@ -117,3 +117,15 @@ def test_short_last_bar_is_flagged_without_a_pickup():
     s = _song([[_note("A4", 2)], [_note("B4", 2)], [_note("G4", 1.5)]])
     checks.apply_rules(s)
     assert [m["flags"] for m in s["measures"]] == [[], [], ["duration"]]
+
+
+def test_vote_picks_the_reading_the_third_run_agrees_with():
+    a = _song([[_note("A4", 2)], [_note("C5", 2)], [_note("D5", 2)]])
+    b = _song([[_note("A4", 2)], [_note("C5", 1), _note("C5", 1)], [_note("E5", 2)]])
+    third = _song([[_note("A4", 2)], [_note("C5", 1), _note("C5", 1)], [_note("F5", 2)]])
+    third["engine"] = {"variant": "3x"}
+    checks.compare(a, b)
+    checks.vote(a, third)
+    assert "vote" not in a["measures"][0]
+    assert a["measures"][1]["vote"] == {"choice": "B", "source": "3x"}
+    assert a["measures"][2]["vote"] == {"choice": "unknown", "source": "3x"}

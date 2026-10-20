@@ -22,6 +22,10 @@ def recognize_page(page: prepare.Page, source_name: str, use_llm: bool) -> dict:
     checks.apply_rules(primary)
     if use_llm and llm.available():
         llm.check_song(page.original, primary)
+    elif any("disagree" in m["flags"] for m in primary["measures"]):
+        # No Claude key: a free third homr run (3x) votes between the two readings
+        third_raw = omr.run(prepare.scaled_copy(page, 3), scale_to_original=1 / 3)
+        checks.vote(primary, song.build(third_raw, page.name, source, "3x"))
     primary["stats"] = {
         "notes": sum(len(m["notes"]) for m in primary["measures"]),
         "doubtful_bars": len(checks.doubtful(primary)),
