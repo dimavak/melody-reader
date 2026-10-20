@@ -22,12 +22,12 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="P6bc02dc4f3b935981bf82223b3addda2">
+    <score-part id="P25b978d3a43b6717233fff09ddfba6e6">
       <part-name />
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="P6bc02dc4f3b935981bf82223b3addda2">
+  <part id="P25b978d3a43b6717233fff09ddfba6e6">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
@@ -206,6 +206,7 @@
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
+        <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">begin</beam>
       </note>

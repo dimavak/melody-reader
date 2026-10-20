@@ -38,4 +38,12 @@ def to_score(song: dict) -> m21.stream.Score:
 
 
 def to_musicxml(song: dict, path: str) -> None:
-    to_score(song).write("musicxml", fp=path)
+    # Without makeNotation music21 keeps one MusicXML measure per song measure, even
+    # when a doubtful bar is too long, so the app can match notes to the JSON one by one.
+    score = to_score(song)
+    for m in score.parts[0].getElementsByClass("Measure"):
+        try:
+            m.makeBeams(inPlace=True)
+        except Exception:  # a bar that does not fit its time signature stays unbeamed
+            pass
+    score.write("musicxml", fp=path, makeNotation=False)
