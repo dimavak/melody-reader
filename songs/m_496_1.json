@@ -217,7 +217,11 @@
      "fermata": false,
      "grace": false
     }
-   ]
+   ],
+   "llm": {
+    "choice": "unknown",
+    "reason": "The image shows only a single parenthesized G4 eighth before the bar's D5 quarter, with no extra low note (B3 or D4) anywhere, so neither reading's extra first grace note matches what is printed."
+   }
   },
   {
    "index": 2,
@@ -354,7 +358,11 @@
      "fermata": false,
      "grace": false
     }
-   ]
+   ],
+   "llm": {
+    "choice": "unknown",
+    "reason": "The image shows only the end of a staff with a double bar line and a bracketed 6/8 time signature, with no clearly visible noteheads, so neither reading can be verified."
+   }
   },
   {
    "index": 4,
@@ -570,6 +578,6 @@
  "stats": {
   "notes": 31,
   "doubtful_bars": 3,
-  "seconds": 6.5
+  "seconds": 14.1
  }
 }
