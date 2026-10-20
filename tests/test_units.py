@@ -1,13 +1,9 @@
 """Fast tests that do not run homr. Run with: python -m pytest tests"""
 
-import json
 import os
 import tempfile
-from types import SimpleNamespace
 
-from PIL import Image
-
-from melody_reader import checks, export, llm, song
+from melody_reader import checks, export, song
 from melody_reader.omr import Notehead
 
 
@@ -85,35 +81,19 @@ def test_export_round_trip():
     assert notes[-1].expressions and notes[-1].quarterLength == 2
 
 
-class _FakeMessages:
-    def __init__(self, answer):
-        self.answer = answer
-        self.calls = []
-
-    def create(self, **kw):
-        self.calls.append(kw)
-        return SimpleNamespace(stop_reason="end_turn", content=[SimpleNamespace(type="text", text=json.dumps(self.answer))])
-
-
-def test_llm_check_only_asks_about_disagreeing_bars():
-    s = _song([[_note("A4", 2)], [_note("B4", 2)]])
-    s["measures"][1]["flags"] = ["disagree"]
-    s["measures"][1]["alt"] = [_note("B4", 1), _note("C5", 1)]
-    fake = _FakeMessages({"choice": "B", "reason": "two quarter notes"})
-    client = SimpleNamespace(beta=SimpleNamespace(messages=fake))
-    with tempfile.TemporaryDirectory() as tmp:
-        img = os.path.join(tmp, "scan.png")
-        Image.new("L", (300, 80), 255).save(img)
-        assert llm.check_song(img, s, client=client) == 1
-    assert s["measures"][1]["llm"] == {"choice": "B", "reason": "two quarter notes"}
-    assert "llm" not in s["measures"][0]
-    call = fake.calls[0]
-    assert call["model"] == "claude-opus-5-5"
-    assert call["messages"][0]["content"][0]["type"] == "image"
-    assert "B4 1, C5 1" in call["messages"][0]["content"][1]["text"]
-
-
 def test_short_last_bar_is_flagged_without_a_pickup():
     s = _song([[_note("A4", 2)], [_note("B4", 2)], [_note("G4", 1.5)]])
     checks.apply_rules(s)
     assert [m["flags"] for m in s["measures"]] == [[], [], ["duration"]]
+
+
+def test_vote_picks_the_reading_the_third_run_agrees_with():
+    a = _song([[_note("A4", 2)], [_note("C5", 2)], [_note("D5", 2)]])
+    b = _song([[_note("A4", 2)], [_note("C5", 1), _note("C5", 1)], [_note("E5", 2)]])
+    third = _song([[_note("A4", 2)], [_note("C5", 1), _note("C5", 1)], [_note("F5", 2)]])
+    third["engine"] = {"variant": "3x"}
+    checks.compare(a, b)
+    checks.vote(a, third)
+    assert "vote" not in a["measures"][0]
+    assert a["measures"][1]["vote"] == {"choice": "B", "source": "3x"}
+    assert a["measures"][2]["vote"] == {"choice": "unknown", "source": "3x"}

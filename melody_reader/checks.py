@@ -1,7 +1,8 @@
 """Find bars that a person should look at.
 
 Two sources of doubt:
-- the two homr runs (original and 2x) disagree on the bar;
+- the two homr runs (original and 2x) disagree on the bar (a third run, 3x,
+  then votes for one of the two readings);
 - simple musical rules fail (bar length vs time signature, a fermata over a dotted
   note, a note far outside the song's range).
 """
@@ -65,6 +66,23 @@ def compare(primary: dict, other: dict) -> None:
         if _content(meas) != _content(alt):
             _add_flag(meas, "disagree")
             meas["alt"] = [{k: n[k] for k in ("pitch", "dur", "dots", "tie", "fermata", "grace")} for n in alt["notes"]]
+
+
+def vote(primary: dict, third: dict) -> None:
+    """Tie-break disagreeing bars with a third reading: whichever of A (primary) or B (alt) it matches."""
+    pairs = _align_measures(primary["measures"], third["measures"])
+    for meas, j in zip(primary["measures"], pairs):
+        if "disagree" not in meas["flags"]:
+            continue
+        third_content = _content(third["measures"][j]) if j is not None else None
+        alt = meas.get("alt")
+        if third_content == _content(meas):
+            choice = "A"
+        elif alt is not None and third_content == [(n["pitch"], n["dur"]) for n in alt]:
+            choice = "B"
+        else:
+            choice = "unknown"
+        meas["vote"] = {"choice": choice, "source": third["engine"]["variant"]}
 
 
 def _bar_length(time: str) -> Fraction:

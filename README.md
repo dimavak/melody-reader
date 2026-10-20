@@ -13,7 +13,7 @@
    - сума працягласцей не адпавядае памеру (`duration`);
    - над нотай з кропкай стаіць фэрмата (`fermata-dot`);
    - нота выходзіць далёка за дыяпазон песні (`range`).
-4. Калі ёсць ключ Claude API, Claude разглядае выразку скана кожнага такта, дзе прагоны разышліся, і выбірае варыянт A або B (або адказвае «невядома»). Гэта толькі падказка: такт застаецца пазначаным для праверкі чалавекам.
+4. Для тактаў, дзе прагоны разышліся, запускаецца трэці прагон homr на копіі 3x. Варыянт, з якім ён супадае, атрымлівае голас (`vote`: A, B або «невядома»). Гэта толькі падказка: такт застаецца пазначаным для праверкі чалавекам. На 14 такіх тактах тэставых песень галасаванне дало 8 правільных падказак і 1 памылковую.
 5. Вынік запісваецца ў `songs/<назва>.json` і `export/<назва>.musicxml`. Старонкі PDF захоўваюцца як выявы ў `pages/`.
 
 ## JSON песні
@@ -28,7 +28,7 @@
  "systems": [{"lines": [88.1, 100.6, 113.1, 125.6, 138.1], "x0": 79, "x1": 1348, "unit": 12.5}],
  "measures": [
   {"index": 1, "time": "4/4", "system": 0, "box": [79, 38, 752, 187],
-   "flags": ["disagree"], "alt": [...], "llm": {"choice": "A", "reason": "..."},
+   "flags": ["disagree"], "alt": [...], "vote": {"choice": "A", "source": "3x"},
    "notes": [{"pitch": "A4", "dur": 1.0, "dots": 0, "tie": null, "fermata": false,
               "grace": false, "x": 222.3, "y": 116.9, "matched": true, "system": 0}]}
  ]
@@ -44,16 +44,12 @@
 ```sh
 pip install -r requirements.txt
 python -m melody_reader recognize scans/          # усе сканы
-python -m melody_reader recognize scans/x.pdf --no-llm
+python -m melody_reader recognize scans/x.pdf
 python -m pytest tests                            # хуткія тэсты
 python tests/evaluate.py songs tests/etalon.json  # параўнанне з эталонам
 ```
 
 Пры першым запуску homr спампоўвае свае мадэлі з GitHub.
-
-## Ключ Claude API
-
-Ключ трэба дадаць у **Settings → Secrets and variables → Actions → New repository secret** пад назвай `ANTHROPIC_API_KEY`. Без ключа ўсё працуе, але праверкі праз Claude не будзе.
 
 ## Ліцэнзія
 

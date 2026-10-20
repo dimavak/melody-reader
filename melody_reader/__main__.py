@@ -35,7 +35,6 @@ def main(argv: list[str] | None = None) -> int:
     rec.add_argument("--songs", default="songs", help="where song JSON goes")
     rec.add_argument("--export", default="export", help="where MusicXML goes")
     rec.add_argument("--pages", default="pages", help="where PDF page images go")
-    rec.add_argument("--no-llm", action="store_true", help="skip the Claude check of doubtful bars")
     rec.add_argument("--skip-existing", action="store_true", help="skip inputs that already have a song JSON")
     args = parser.parse_args(argv)
 
@@ -47,7 +46,7 @@ def main(argv: list[str] | None = None) -> int:
             continue
         print(f"== {path}", flush=True)
         try:
-            for out in pipeline.recognize_file(path, args.songs, args.export, args.pages, not args.no_llm):
+            for out in pipeline.recognize_file(path, args.songs, args.export, args.pages):
                 print(f"   -> {out}", flush=True)
         except Exception as e:
             print(f"   !! {type(e).__name__}: {e}", flush=True)

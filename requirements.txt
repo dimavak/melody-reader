@@ -2,4 +2,3 @@ homr==0.7.0
 music21==10.5.0
 pymupdf==2.0
 pillow
-anthropic

@@ -31,6 +31,14 @@ def _save_pair(img: Image.Image, name: str, workdir: str) -> Page:
     return Page(name, original, upscaled, img.width, img.height)
 
 
+def scaled_copy(page: Page, factor: int) -> str:
+    """Another upscaled copy of a page (for the third, tie-breaking homr run)."""
+    path = page.original.replace(".png", f"@{factor}x.png")
+    with Image.open(page.original) as img:
+        img.resize((img.width * factor, img.height * factor), Image.LANCZOS).save(path)
+    return path
+
+
 def load_pages(path: str, workdir: str) -> list[Page]:
     """Split the input into pages. A PDF gives one page per PDF page, an image gives one."""
     os.makedirs(workdir, exist_ok=True)
