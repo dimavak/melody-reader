@@ -1,0 +1,42 @@
+#cloud-config
+# Paste this into "Cloud config" when creating the Hetzner server (Ubuntu 24.04).
+# It installs Docker, opens only ports 22, 80 and 443, adds 2 GB of swap for homr,
+# turns on automatic security updates and creates the user "deploy" that GitHub
+# Actions logs in as, with the same SSH key you chose for the server.
+package_update: true
+package_upgrade: true
+packages:
+  - docker.io
+  - docker-compose-v2
+  - rsync
+  - ufw
+  - unattended-upgrades
+  - fail2ban
+
+users:
+  - default
+  - name: deploy
+    groups: [docker]
+    shell: /bin/bash
+    lock_passwd: true
+
+write_files:
+  - path: /etc/ssh/sshd_config.d/10-hardening.conf
+    content: |
+      PasswordAuthentication no
+      KbdInteractiveAuthentication no
+      PermitRootLogin prohibit-password
+
+runcmd:
+  - install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+  - install -m 600 -o deploy -g deploy /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+  - install -d -o deploy -g deploy /srv/apps
+  - fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+  - echo '/swapfile none swap sw 0 0' >> /etc/fstab
+  - ufw default deny incoming
+  - ufw allow 22/tcp
+  - ufw allow 80/tcp
+  - ufw allow 443
+  - ufw --force enable
+  - systemctl enable --now docker fail2ban
+  - systemctl restart ssh

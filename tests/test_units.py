@@ -81,6 +81,18 @@ def test_export_round_trip():
     assert notes[-1].expressions and notes[-1].quarterLength == 2
 
 
+def test_export_keeps_an_overfull_bar_as_one_measure():
+    # The web app matches MusicXML notes to the JSON by position, so nothing may be split
+    s = _song([[_note("A4", 1), _note("B4", 1), _note("C5", 2)], [_note("D5", 1), _note("E5", 1)]])
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "x.musicxml")
+        export.to_musicxml(s, path)
+        with open(path, encoding="utf-8") as f:
+            xml = f.read()
+    assert xml.count("<measure ") == 2
+    assert xml.count("<note") == 5
+
+
 def test_short_last_bar_is_flagged_without_a_pickup():
     s = _song([[_note("A4", 2)], [_note("B4", 2)], [_note("G4", 1.5)]])
     checks.apply_rules(s)

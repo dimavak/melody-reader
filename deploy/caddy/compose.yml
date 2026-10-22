@@ -1,0 +1,25 @@
+# Caddy: the one entry point of the VPS. It gets HTTPS certificates by itself and
+# passes each site to its app; every project adds a file to sites/.
+name: caddy
+
+services:
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443", "443:443/udp"]
+    environment:
+      BASE_DOMAIN: ${BASE_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./sites:/etc/caddy/sites:ro
+      - data:/data
+      - config:/config
+    networks: [web]
+
+volumes:
+  data:
+  config:
+
+networks:
+  web:
+    name: web

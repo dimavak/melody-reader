@@ -1,0 +1,65 @@
+# Publishes the Melody reader web app (web/ plus the recognised songs) to GitHub Pages.
+# Runs after every recognition, since commits made by the recognize workflow
+# do not start other workflows on their own.
+name: Publish web app
+
+on:
+  push:
+    branches: [main]
+    paths: ["web/**", "songs/**", "export/**", "scans/**", "pages/**", ".github/workflows/pages.yml"]
+  workflow_run:
+    workflows: ["Recognize scans"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Get Verovio (music notation)
+        run: |
+          npm pack verovio@6.3.0 --silent
+          tar xzf verovio-6.3.0.tgz
+
+      - name: Build
+        env:
+          SERVER_URL: ${{ vars.SERVER_URL }}
+          HOST: ${{ vars.SERVER_HOST }}
+          DOMAIN: ${{ vars.DOMAIN }}
+        run: |
+          # the same address the deploy-server workflow sets up, unless SERVER_URL says otherwise
+          if [ -z "$SERVER_URL" ] && [ -n "$HOST" ]; then
+            export SERVER_URL="https://melody.${DOMAIN:-${HOST//./-}.sslip.io}"
+          fi
+          python web/build.py _site --verovio package/dist/verovio-toolkit-wasm.js
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

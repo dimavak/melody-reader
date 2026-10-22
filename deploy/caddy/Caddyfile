@@ -1,0 +1,2 @@
+# BASE_DOMAIN is your own domain, or <ip-with-dashes>.sslip.io while there is none.
+import sites/*.caddy

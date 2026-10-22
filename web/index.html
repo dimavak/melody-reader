@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="be">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Melody reader</title>
+<meta name="description" content="Распазнанне нот са сканаў і фота, прагляд і праслухоўванне мелодый.">
+<meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1916" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#/">
+    <img src="icon.svg" alt="" width="28" height="28">
+    <span>Melody reader</span>
+  </a>
+  <div class="actions">
+    <button type="button" class="btn primary" id="camera">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+      <span>Сфатаграфаваць</span>
+    </button>
+    <button type="button" class="btn" id="upload">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0-4 4m4-4 4 4M5 20h14"/></svg>
+      <span>Загрузіць</span>
+    </button>
+    <button type="button" class="btn icon" id="settings" aria-label="Налады">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9 7 7m10 10 2.1 2.1M4.9 19.1 7 17m10-10 2.1-2.1"/></svg>
+    </button>
+  </div>
+  <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+  <input type="file" id="fileInput" accept="image/png,image/jpeg,application/pdf,.pdf" hidden>
+</header>
+
+<div class="app" id="app">
+  <nav class="list" id="list" aria-label="Песні">
+    <div class="search"><input type="search" id="filter" placeholder="Пошук па нумары або назве" aria-label="Пошук"></div>
+    <div id="jobs"></div>
+    <section id="localSection" hidden>
+      <h2>На гэтай прыладзе</h2>
+      <ul id="localSongs"></ul>
+    </section>
+    <section>
+      <h2>Калекцыя</h2>
+      <ul id="repoSongs"><li class="muted pad">Загружаю…</li></ul>
+    </section>
+  </nav>
+
+  <main class="song" id="song">
+    <div class="empty" id="empty">
+      <img src="icon.svg" alt="" width="64" height="64">
+      <p>Выберыце песню або сфатаграфуйце ноты.</p>
+    </div>
+    <article id="view" hidden>
+      <div class="songhead">
+        <a href="#/" class="back" aria-label="Да спісу">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+        </a>
+        <div class="titles">
+          <h1 id="title"></h1>
+          <p class="muted" id="meta"></p>
+        </div>
+        <details class="more">
+          <summary class="btn icon" aria-label="Яшчэ">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+          </summary>
+          <div class="menu">
+            <button type="button" id="dlJson">Спампаваць JSON</button>
+            <button type="button" id="dlXml">Спампаваць MusicXML</button>
+            <button type="button" id="remove" class="danger" hidden>Выдаліць з прылады</button>
+          </div>
+        </details>
+      </div>
+
+      <div class="panes">
+        <figure class="pane scan" id="scan">
+          <figcaption>Скан</figcaption>
+          <div class="scanbox" id="scanbox">
+            <img id="scanImg" alt="Скан нот">
+            <svg id="scanSvg" aria-hidden="true"></svg>
+          </div>
+        </figure>
+        <figure class="pane notes">
+          <figcaption>Распазнаныя ноты <span class="muted hint">Націсніце на такт, каб іграць з яго</span></figcaption>
+          <div class="notation" id="notation"><p class="muted pad">Рыхтую нотны запіс…</p></div>
+        </figure>
+      </div>
+
+      <section class="doubts" id="doubts" hidden>
+        <h2>Праверце гэтыя такты</h2>
+        <ul id="doubtList"></ul>
+      </section>
+    </article>
+
+    <div class="player" id="player" hidden>
+      <button type="button" class="play" id="play" aria-label="Іграць">
+        <svg viewBox="0 0 24 24" aria-hidden="true" id="playIcon"><path d="M7 4.5v15l13-7.5z"/></svg>
+      </button>
+      <div class="seg" id="voices" role="group" aria-label="Гук">
+        <button type="button" data-v="voice">Голас</button>
+        <button type="button" data-v="lira">Голас і ліра</button>
+        <button type="button" data-v="duda">Дуда</button>
+      </div>
+      <label class="tempo">
+        <span>Тэмп <b id="bpmV"></b></span>
+        <input type="range" id="bpm" min="40" max="160" step="2" aria-label="Тэмп">
+      </label>
+    </div>
+  </main>
+</div>
+
+<dialog id="settingsDlg">
+  <form method="dialog">
+    <h2>Налады</h2>
+    <label class="field">
+      <span>Адрас сервера распазнання</span>
+      <input type="url" id="serverUrl" placeholder="https://melody.example.org" autocomplete="off">
+      <small class="muted">Калі поле пустое, бярэцца адрас, з якім праграма апублікаваная.</small>
+    </label>
+    <p class="muted small">Песні, распазнаныя тут, захоўваюцца толькі на гэтай прыладзе. Каб перанесці песню, спампуйце яе JSON.</p>
+    <div class="row end">
+      <button class="btn primary" value="save">Захаваць</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="sound.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
