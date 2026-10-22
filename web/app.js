@@ -427,7 +427,7 @@
     if (!job) return;
     var d = document.createElement('div'); d.className = 'job' + (job.stage === 'failed' ? ' failed' : '');
     var text = {
-      waking: 'Сервер прачынаецца. Калі ім даўно не карысталіся, гэта займае да 2 хвілін.',
+      waking: 'Сервер пакуль не адказвае, спрабую яшчэ раз…',
       sending: 'Адпраўляю файл…',
       queued: job.ahead ? 'У чарзе, перад вамі ' + job.ahead + '.' : 'У чарзе…',
       running: 'Распазнаю ноты. Звычайна гэта займае 20–90 секунд' + (job.seconds ? ', ужо ' + job.seconds + ' с.' : '.'),

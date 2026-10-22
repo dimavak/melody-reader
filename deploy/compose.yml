@@ -1,0 +1,19 @@
+# Melody reader recognition server on the VPS. Caddy (deploy/caddy) gives it HTTPS
+# through the shared "web" network.
+name: melody-reader
+
+services:
+  recognizer:
+    build:
+      context: ..
+      dockerfile: server/Dockerfile
+    image: melody-reader-recognizer
+    container_name: melody-recognizer
+    restart: unless-stopped
+    environment:
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://dimavak.github.io}
+    networks: [web]
+
+networks:
+  web:
+    external: true

@@ -2,8 +2,7 @@
 
 Copies web/ and the recognised songs (songs/, export/ and their images) into the
 output folder and writes data/index.json, the list the app shows. The address
-of the recognition server goes to config.json: SERVER_URL if set, otherwise the
-Space that the token in HF_TOKEN belongs to (see .github/workflows/space.yml).
+of the recognition server (SERVER_URL) goes to config.json.
 """
 
 from __future__ import annotations
@@ -18,24 +17,10 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WEB = os.path.join(ROOT, "web")
-SPACE_NAME = "melody-reader"
 
 
 def server_url() -> str:
-    if os.environ.get("SERVER_URL"):
-        return os.environ["SERVER_URL"].rstrip("/")
-    token = os.environ.get("HF_TOKEN")
-    if not token:
-        return ""
-    try:
-        from huggingface_hub import HfApi
-
-        owner = HfApi(token=token).whoami()["name"]
-    except Exception as e:  # the app still works for reading without a server
-        print(f"Could not read the Hugging Face account: {e}", file=sys.stderr)
-        return ""
-    host = f"{owner}-{SPACE_NAME}".replace("_", "-").replace(".", "-").lower()
-    return f"https://{host}.hf.space"
+    return os.environ.get("SERVER_URL", "").rstrip("/")
 
 
 def songs(out: str) -> list[dict]:

@@ -1,0 +1,81 @@
+# Deploys the recognition server to our VPS (see deploy/README.md).
+# Needs the secret SSH_KEY (private key of the "deploy" user) and the variable
+# SERVER_HOST (the server's IP). DOMAIN is optional: without it the server is
+# reached at melody.<ip-with-dashes>.sslip.io, which Caddy gives HTTPS too.
+name: Deploy server
+
+on:
+  push:
+    branches: [main]
+    paths: ["server/**", "melody_reader/**", "requirements.txt", "deploy/**", ".github/workflows/deploy-server.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-server
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      HOST: ${{ vars.SERVER_HOST }}
+      DOMAIN: ${{ vars.DOMAIN }}
+    steps:
+      - name: Check settings
+        id: check
+        run: |
+          if [ -z "$SSH_KEY" ] || [ -z "$HOST" ]; then
+            echo "::warning::Secret SSH_KEY or variable SERVER_HOST is not set, so the server was not deployed."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+            echo "BASE_DOMAIN=${DOMAIN:-${HOST//./-}.sslip.io}" >> "$GITHUB_ENV"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.ok == 'true'
+
+      - name: SSH key
+        if: steps.check.outputs.ok == 'true'
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          printf 'Host server\n  HostName %s\n  User deploy\n  IdentityFile ~/.ssh/id_deploy\n' "$HOST" > ~/.ssh/config
+
+      - name: Copy files
+        if: steps.check.outputs.ok == 'true'
+        run: |
+          rsync -az --delete -R requirements.txt melody_reader server deploy server:/srv/apps/melody-reader/
+
+      - name: Start
+        if: steps.check.outputs.ok == 'true'
+        run: |
+          ssh server BASE_DOMAIN="$BASE_DOMAIN" bash -s <<'SH'
+          set -euo pipefail
+          src=/srv/apps/melody-reader/deploy/caddy
+          mkdir -p /srv/apps/caddy/sites
+          cp "$src/compose.yml" "$src/Caddyfile" /srv/apps/caddy/
+          cp "$src/sites/melody-reader.caddy" /srv/apps/caddy/sites/
+          echo "BASE_DOMAIN=$BASE_DOMAIN" > /srv/apps/caddy/.env
+          cd /srv/apps/caddy && docker compose up -d
+          docker compose exec -T caddy caddy reload --config /etc/caddy/Caddyfile
+          cd /srv/apps/melody-reader/deploy && docker compose up -d --build --remove-orphans
+          docker image prune -f > /dev/null
+          SH
+
+      - name: Check that it answers
+        if: steps.check.outputs.ok == 'true'
+        run: |
+          url="https://melody.$BASE_DOMAIN/"
+          for i in $(seq 1 30); do
+            if curl -fsS "$url"; then
+              echo "Server: $url" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::$url does not answer"
+          exit 1

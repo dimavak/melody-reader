@@ -1,9 +1,9 @@
-"""Recognition server for the Melody reader web app (runs as a Hugging Face Space).
+"""Recognition server for the Melody reader web app (runs in Docker on our VPS, see deploy/).
 
 The browser posts a scan or a photo to /jobs and gets a job id back, then asks
 /jobs/<id> every few seconds until the notes are ready. homr takes a minute or
 two per page on the free CPU, longer than a single HTTP request should wait, and
-only one job runs at a time so that two uploads do not share the two CPU cores.
+only one job runs at a time so that two uploads do not share the server's two CPU cores.
 """
 
 from __future__ import annotations

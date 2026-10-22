@@ -1,4 +1,4 @@
-"""The recognition server (space/app.py) with homr replaced by a stub."""
+"""The recognition server (server/app.py) with homr replaced by a stub."""
 
 import os
 import sys
@@ -8,7 +8,7 @@ import pytest
 
 pytest.importorskip("fastapi")
 pytest.importorskip("httpx")
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "space"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "server"))
 
 from fastapi.testclient import TestClient  # noqa: E402
 

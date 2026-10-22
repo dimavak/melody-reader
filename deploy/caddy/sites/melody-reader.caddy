@@ -1,0 +1,6 @@
+melody.{$BASE_DOMAIN} {
+	request_body {
+		max_size 25MB
+	}
+	reverse_proxy melody-recognizer:7860
+}

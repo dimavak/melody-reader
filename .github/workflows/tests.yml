@@ -17,6 +17,6 @@ jobs:
           cache: pip
           cache-dependency-path: |
             requirements.txt
-            space/requirements.txt
-      - run: pip install -r requirements.txt -r space/requirements.txt pytest httpx
+            server/requirements.txt
+      - run: pip install -r requirements.txt -r server/requirements.txt pytest httpx
       - run: python -m pytest -q tests

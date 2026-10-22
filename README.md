@@ -24,22 +24,17 @@
 - Мелодыю можна праслухаць голасам, голасам з лірай або на дудзе, і курсор ідзе па нотах. Калі націснуць на такт, гучанне пачнецца з яго.
 - Кнопкі «Сфатаграфаваць» і «Загрузіць» прымаюць фота, PNG, JPG або PDF. Файл адпраўляецца на сервер распазнання, і праз 20–90 секунд песня з'яўляецца ў раздзеле «На гэтай прыладзе». Такія песні захоўваюцца толькі ў браўзеры, але іх можна спампаваць як JSON або MusicXML.
 
-Код старонкі ляжыць у [web/](web/), а сервер распазнання ў [space/](space/). Сервер працуе бясплатна на Hugging Face Spaces і выконвае той самы канвеер, што і GitHub Actions. Калі ім даўно не карысталіся, ён засынае, і першы запыт абуджае яго прыкладна за хвіліну.
+Код старонкі ляжыць у [web/](web/), а сервер распазнання ў [server/](server/). Сервер працуе ў Docker на нашым VPS і выконвае той самы канвеер, што і GitHub Actions. Як наладзіць сервер, апісана ў [deploy/README.md](deploy/README.md).
 
-### Налада (адзін раз)
+### Наладка Pages (адзін раз)
 
-1. Стварыце ўліковы запіс на [huggingface.co](https://huggingface.co/join), калі яго няма. Потым у [Settings → Access Tokens](https://huggingface.co/settings/tokens) стварыце ключ з правам **Write**.
-2. У гэтым рэпазіторыі адкрыйце Settings → Secrets and variables → Actions і дадайце сакрэт `HF_TOKEN` з гэтым ключом.
-3. У Settings → Pages выберыце Source: **GitHub Actions**.
-4. Запусціце ў Actions працэсы «Deploy server» і «Publish web app» (далей яны запускаюцца самі). Першы стварае Space `<ваша імя>/melody-reader`, другі публікуе старонку і запісвае ў яе адрас сервера.
-
-Калі сервер жыве па іншым адрасе, яго можна задаць зменнай `SERVER_URL` у тых жа наладах Actions або ў наладах самой старонкі.
+У Settings → Pages выберыце Source: **GitHub Actions**. Старонка публікуецца сама пасля кожнай змены і кожнага распазнання. Адрас сервера яна бярэ з зменных `SERVER_HOST`, `DOMAIN` або `SERVER_URL` (Settings → Secrets and variables → Actions → Variables).
 
 ### Праверка на сваім кампутары
 
 ```sh
-pip install -r requirements.txt -r space/requirements.txt
-(cd space && PYTHONPATH=.. uvicorn app:app --port 7860) &
+pip install -r requirements.txt -r server/requirements.txt
+(cd server && PYTHONPATH=.. uvicorn app:app --port 7860) &
 npm pack verovio@6.3.0 && tar xzf verovio-6.3.0.tgz
 SERVER_URL=http://localhost:7860 python web/build.py _site --verovio package/dist/verovio-toolkit-wasm.js
 python -m http.server -d _site 8000                  # http://localhost:8000

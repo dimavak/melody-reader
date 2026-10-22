@@ -40,10 +40,14 @@ jobs:
 
       - name: Build
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
           SERVER_URL: ${{ vars.SERVER_URL }}
+          HOST: ${{ vars.SERVER_HOST }}
+          DOMAIN: ${{ vars.DOMAIN }}
         run: |
-          pip install -q huggingface_hub
+          # the same address the deploy-server workflow sets up, unless SERVER_URL says otherwise
+          if [ -z "$SERVER_URL" ] && [ -n "$HOST" ]; then
+            export SERVER_URL="https://melody.${DOMAIN:-${HOST//./-}.sslip.io}"
+          fi
           python web/build.py _site --verovio package/dist/verovio-toolkit-wasm.js
 
       - uses: actions/upload-pages-artifact@v3
