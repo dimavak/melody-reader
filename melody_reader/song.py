@@ -122,6 +122,16 @@ def _note_dict(el) -> dict:
     }
 
 
+def _repeats(meas) -> dict:
+    """Repeat signs at the bar's edges, kept only when present."""
+    out = {}
+    if isinstance(meas.leftBarline, m21.bar.Repeat) and meas.leftBarline.direction == "start":
+        out["repeat_start"] = True
+    if isinstance(meas.rightBarline, m21.bar.Repeat) and meas.rightBarline.direction == "end":
+        out["repeat_end"] = True
+    return out
+
+
 def build(result: HomrResult, song_id: str, source: dict, variant: str) -> dict:
     """Song JSON for one page."""
     score = m21.converter.parseData(result.musicxml, format="musicxml")
@@ -144,6 +154,7 @@ def build(result: HomrResult, song_id: str, source: dict, variant: str) -> dict:
         notes = [_note_dict(el) for el in meas.flatten().notesAndRests]
         flat_notes.extend(notes)
         measures.append({"index": len(measures) + 1, "time": mtime, "notes": notes, "flags": []})
+        measures[-1].update(_repeats(meas))
 
     # Which staff each note is on
     if len(events) == len(flat_notes):
