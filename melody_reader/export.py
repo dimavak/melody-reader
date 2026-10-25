@@ -32,6 +32,10 @@ def to_score(song: dict) -> m21.stream.Score:
             if n.get("grace"):
                 el = el.getGrace()
             m.append(el)
+        if meas.get("repeat_start"):
+            m.leftBarline = m21.bar.Repeat(direction="start")
+        if meas.get("repeat_end"):
+            m.rightBarline = m21.bar.Repeat(direction="end")
         part.append(m)
     score.append(part)
     return score
