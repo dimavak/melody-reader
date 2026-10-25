@@ -149,4 +149,6 @@ def test_site_merge_keeps_old_repeats_and_old_entry_when_nothing_is_read():
     }
     s = _site_song([[_note("A4", 1, x=30.0), _note("B4", 1, x=60.0)], [_note("C5", 1, x=150.0), _note("D5", 1, x=270.0)]])
     assert site.merge(old, s)["seq"] == [0, 1, 2, 3, 2, 3]
+    s["measures"][1]["repeat_end"] = True
+    assert "seq" not in site.merge(None, s)
     assert site.merge(old, _site_song([[_note(None, 2)]])) is old

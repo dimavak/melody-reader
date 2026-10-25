@@ -110,7 +110,9 @@ def merge(old: dict | None, song: dict) -> dict:
     new = entry(song)
     if not any(e[0] >= 0 for e in new["ev"]):
         return old if old is not None else new
-    # repeats already marked on the site win over the repeat signs homr found
+    # homr finds the end sign of a repeat but often misses its start, so on the site
+    # only the repeats already marked there are kept
+    new.pop("seq", None)
     seq = carry_seq(old, new) if old is not None else None
     if seq is not None:
         new["seq"] = seq
